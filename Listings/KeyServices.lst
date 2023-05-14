@@ -1,0 +1,84 @@
+C51 COMPILER V9.60.0.0   KEYSERVICES                                                       05/14/2023 17:39:56 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE KEYSERVICES
+OBJECT MODULE PLACED IN .\Objects\KeyServices.obj
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE User\src\KeyServices.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\
+                    -Listings\KeyServices.lst) OBJECT(.\Objects\KeyServices.obj)
+
+line level    source
+
+   1          /* ---------------------------------- 包含头文件 --------------------------------- */
+   2          #include "..\inc\STC8Ax_REG.h"
+   3          #include "..\inc\Definition.h"
+   4          
+   5          #include "..\inc\KeyScan.h"
+   6          #include "..\inc\LEDChange.h"
+   7          #include "..\inc\NixieTube.h"
+   8          
+   9          /* 私有变量 */
+  10          
+  11          void KeyServices()
+  12          {
+  13   1          switch (Keysign)
+  14   1          {
+  15   2          case 1:
+  16   2              if (TR0 == 1) // 跑马灯开启
+  17   2              {
+  18   3                  direction_flag = !direction_flag; // 改变LED方向
+  19   3              }
+  20   2              else if (TR0 == 0) // 跑马灯关闭，不执行任何操作
+  21   2              {
+  22   3                  ;
+  23   3              }
+  24   2              Keysign = 0;
+  25   2              break;
+  26   2          case 2:
+  27   2              if (TR0 == 1)
+  28   2              {
+  29   3                  if (LEDChangeTime >= 400)
+  30   3                      LEDChangeTime -= 100;
+  31   3              }
+  32   2              else if (TR0 == 0)
+  33   2              {
+  34   3                  ;
+  35   3              }
+  36   2              Keysign = 0;
+  37   2              break;
+  38   2          case 3:
+  39   2              if (TR0 == 1)
+  40   2              {
+  41   3                  if (LEDChangeTime <= 800)
+  42   3                      LEDChangeTime += 100;
+  43   3              }
+  44   2              else if (TR0 == 0)
+  45   2              {
+  46   3                  ;
+  47   3              }
+  48   2              Keysign = 0;
+  49   2              break;
+  50   2          case 4:
+  51   2              TR0 = !TR0;
+  52   2              Keysign = 0;
+  53   2              break;
+  54   2          default:
+C51 COMPILER V9.60.0.0   KEYSERVICES                                                       05/14/2023 17:39:56 PAGE 2   
+
+  55   2              Keysign = 0;
+  56   2              break;
+  57   2          }
+  58   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     96    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
