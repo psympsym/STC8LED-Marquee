@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/14/2023 22:42:47 PAGE 1   
+C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/14/2023 23:08:16 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE NIXIETUBE
@@ -62,7 +62,7 @@ line level    source
   52   3                      DigShow_PORT = DigDisplay_table[13];
   53   3                  }
   54   2                  else if (TR0 == 0) // ≈‹¬Ìµ∆‘›Õ£ œ‘ æF
-C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/14/2023 22:42:47 PAGE 2   
+C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/14/2023 23:08:16 PAGE 2   
 
   55   2                  {
   56   3                      DigShow_PORT = DigDisplay_table[15];

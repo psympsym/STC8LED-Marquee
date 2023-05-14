@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   KEYSCAN                                                           05/14/2023 22:42:46 PAGE 1   
+C51 COMPILER V9.60.0.0   KEYSCAN                                                           05/14/2023 23:08:16 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE KEYSCAN
@@ -62,7 +62,7 @@ line level    source
   52   1          {
   53   2              keyt2++;
   54   2              if (keyt2 >= KEY_TIME) // °´¼üÈ¥¶¶
-C51 COMPILER V9.60.0.0   KEYSCAN                                                           05/14/2023 22:42:46 PAGE 2   
+C51 COMPILER V9.60.0.0   KEYSCAN                                                           05/14/2023 23:08:16 PAGE 2   
 
   55   2              {
   56   3                  keyt2 = 0;
