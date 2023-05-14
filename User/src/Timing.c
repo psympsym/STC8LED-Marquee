@@ -7,11 +7,10 @@
 #include "..\inc\LEDChange.h"
 
 /* ---------------------------------- 私有宏定义 --------------------------------- */
-#define KEY_TIME 	1  // 按键检测时间ms
-#define NIXIE_TIME 	1 // 数码管刷新时间ms
 
 /* ---------------------------------- 私有变量 ---------------------------------- */
-uint8 count2 = 0;
+uint8 count = 0;
+uint8 count1 = 0;
 
 /* ----------------------------------- 函数 ----------------------------------- */
 
@@ -48,28 +47,11 @@ void Time1_Config() // 初始化外围
     TMOD &= 0x0F; // 设置定时器1模式
     TMOD |= 0x10; // 设置定时器1模式为16为自动重装载
 
-    TH1 = 0xF8; // 设置定时0初始值(65535-2000)=63535=0xF830
-    TL1 = 0x30; // 设置定时0初始值
+    TH1 = 0xFF; // 设置定时0初始值(65536-2)=63534=0xFFFE
+    TL1 = 0xEC; // 设置定时0初始值
     TF1 = 0;    // 清除TF1标志
     ET1 = 1;
     TR1 = 1;    // 定时器1开始计时
-}
-
-/**
- * 功能：延时函数，ms级别。
- * 参数：nms 延时时间
- * 返回：None
- * 说明：
- */
-void Delay_ms(uint16_t nms)
-{
-    uint16_t i;
-    do
-    {
-        i = 1844;
-        while (--i)
-            ;
-    } while (--nms);
 }
 
 // 用于按键扫描程序
@@ -80,10 +62,10 @@ void Time0_ISR() interrupt 1
 
 
     // 开启跑马灯
-    count2 = 0;
-    if (count2 >= LEDChangeTime)
+    count++;
+    if (count >= LEDChangeTime)
     {
-        count2 = 0;  // 清空计数
+        count = 0;  // 清空计数
         LEDChange(); // LED变化
     }
 
@@ -95,14 +77,20 @@ void Time0_ISR() interrupt 1
 void Time1_ISR() interrupt 3
 {
     TF1 = 0; //清除中断标志
-    TR1 = 0; //关中断
+    TR1 = 0; //关中断    
 
-    KeyScan(); // 按键扫描
-    
+    // 扫描按键
+    KeyScan();
+
     // 扫描数码管
-    NixieTube();
+    count1++;
+    if (count1 >= 100)
+    {
+        count1 = 0;
+        NixieTube();
+    }
 
-    TH1 = 0xf8; // 重装初始值(65535-2000)=63535=0xF830
-    TL1 = 0x30;
+    TH1 = 0xFF; // 重装初始值(65536-2)=63534=0xFFFE
+    TL1 = 0xEC;
 	TR1 = 1;
 }

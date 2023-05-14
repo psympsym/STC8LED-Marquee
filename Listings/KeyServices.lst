@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   KEYSERVICES                                                       05/14/2023 17:39:56 PAGE 1   
+C51 COMPILER V9.60.0.0   KEYSERVICES                                                       05/14/2023 22:42:46 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE KEYSERVICES
@@ -36,8 +36,8 @@ line level    source
   26   2          case 2:
   27   2              if (TR0 == 1)
   28   2              {
-  29   3                  if (LEDChangeTime >= 400)
-  30   3                      LEDChangeTime -= 100;
+  29   3                  if (LEDChangeTime >= 40)
+  30   3                      LEDChangeTime -= 10;
   31   3              }
   32   2              else if (TR0 == 0)
   33   2              {
@@ -48,8 +48,8 @@ line level    source
   38   2          case 3:
   39   2              if (TR0 == 1)
   40   2              {
-  41   3                  if (LEDChangeTime <= 800)
-  42   3                      LEDChangeTime += 100;
+  41   3                  if (LEDChangeTime <= 80)
+  42   3                      LEDChangeTime += 10;
   43   3              }
   44   2              else if (TR0 == 0)
   45   2              {
@@ -62,7 +62,7 @@ line level    source
   52   2              Keysign = 0;
   53   2              break;
   54   2          default:
-C51 COMPILER V9.60.0.0   KEYSERVICES                                                       05/14/2023 17:39:56 PAGE 2   
+C51 COMPILER V9.60.0.0   KEYSERVICES                                                       05/14/2023 22:42:46 PAGE 2   
 
   55   2              Keysign = 0;
   56   2              break;

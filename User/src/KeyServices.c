@@ -26,8 +26,8 @@ void KeyServices()
     case 2:
         if (TR0 == 1)
         {
-            if (LEDChangeTime >= 400)
-                LEDChangeTime -= 100;
+            if (LEDChangeTime >= 40)
+                LEDChangeTime -= 10;
         }
         else if (TR0 == 0)
         {
@@ -38,8 +38,8 @@ void KeyServices()
     case 3:
         if (TR0 == 1)
         {
-            if (LEDChangeTime <= 800)
-                LEDChangeTime += 100;
+            if (LEDChangeTime <= 80)
+                LEDChangeTime += 10;
         }
         else if (TR0 == 0)
         {

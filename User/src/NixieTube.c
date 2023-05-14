@@ -6,18 +6,18 @@
 #include "..\inc\LEDChange.h"
 
 /* ---------------------------------- 扩展变量 ---------------------------------- */
-uint16 LEDChangeTime = 300; // LED变化时间ms
+uint8 LEDChangeTime = 30; // LED变化时间x10ms
 
 /* ---------------------------------- 私有变量 ---------------------------------- */
 uint8 digit_seg_en = 0; // 数码管位选
-uint8 speed_second = 0;
-uint8 speed_first = 0;
+uint8 speed_second = 0; // 速度第二位
+uint8 speed_first = 0; // 速度第一位
 
 /* ----------------------------------- 函数 ---------------------------------- */
 void NixieTube()
 {
-    speed_second = LEDChangeTime / 100;     // 取速度第二位
-    speed_first =  LEDChangeTime / 10 % 10; // 取速度第一位
+    speed_second = LEDChangeTime / 10;  // 取速度第二位
+    speed_first =  LEDChangeTime % 10;  // 取速度第一位
 
     digit_seg_en++;
     if (digit_seg_en > 4)

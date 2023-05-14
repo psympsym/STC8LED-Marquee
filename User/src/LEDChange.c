@@ -6,7 +6,7 @@
 uint8 direction_flag = 1; // 方向标志
 
 /* ---------------------------------- 私有变量 ---------------------------------- */
-uint8 count = 0; // LED位选
+uint8 LED_PORT = 0; // LED位选
 
 /* ----------------------------------- 函数 ---------------------------------- */
 
@@ -17,31 +17,25 @@ uint8 count = 0; // LED位选
 */
 void LEDChange()
 {
-    // 初始化LED
-    // led_dr1 = 1;
-    // led_dr2 = 1;
-    // led_dr3 = 1;
-    // led_dr4 = 1;
-
     if (direction_flag) // 选择方向
     {
-        count++;
+        LED_PORT++;
     }
     else
     {
-        count--;
+        LED_PORT--;
     }
 
-    if (count > 4)
+    if (LED_PORT > 4)
     {
-        count = 1;
+        LED_PORT = 1;
     }
-    else if (count < 1)
+    else if (LED_PORT < 1)
     {
-        count = 4;
+        LED_PORT = 4;
     }
 
-    switch (count) // LED位选
+    switch (LED_PORT) // LED位选
     {
     case 1:
         P0 = 0x7F;
