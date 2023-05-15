@@ -18,7 +18,7 @@ void NixieTube()
 {
     speed_second = LEDChangeTime / 10;  // 取速度第二位
     speed_first =  LEDChangeTime % 10;  // 取速度第一位
-
+	// 移位操作
     digit_seg_en++;
     if (digit_seg_en > 4)
     {

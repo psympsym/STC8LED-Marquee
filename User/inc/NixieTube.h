@@ -2,7 +2,7 @@
 #define _NixieTube_h_
 
 /* ---------------------------------- ¿©’π±‰¡ø ---------------------------------- */
-extern uint16 LEDChangeTime;
+extern uint8 LEDChangeTime;
 
 void NixieTube();
 

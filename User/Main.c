@@ -2,6 +2,7 @@
 #include ".\inc\Definition.h"
 
 #include ".\inc\Init.h"
+#include ".\inc\KeyScan.h"
 #include ".\inc\KeyServices.h"
 #include ".\inc\Timing.h"
 
@@ -23,6 +24,8 @@ void main()
     Time1_Config();    // 按键扫描， 数码管扫描
     while (1)
     {
+		// 扫描按键
+		KeyScan();
         KeyServices();
     }
 }

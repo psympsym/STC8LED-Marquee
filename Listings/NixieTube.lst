@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/14/2023 23:08:16 PAGE 1   
+C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/15/2023 08:58:29 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE NIXIETUBE
@@ -28,7 +28,7 @@ line level    source
   18          {
   19   1          speed_second = LEDChangeTime / 10;  // 取速度第二位
   20   1          speed_first =  LEDChangeTime % 10;  // 取速度第一位
-  21   1      
+  21   1              // 移位操作
   22   1          digit_seg_en++;
   23   1          if (digit_seg_en > 4)
   24   1          {
@@ -62,7 +62,7 @@ line level    source
   52   3                      DigShow_PORT = DigDisplay_table[13];
   53   3                  }
   54   2                  else if (TR0 == 0) // 跑马灯暂停 显示F
-C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/14/2023 23:08:16 PAGE 2   
+C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/15/2023 08:58:29 PAGE 2   
 
   55   2                  {
   56   3                      DigShow_PORT = DigDisplay_table[15];

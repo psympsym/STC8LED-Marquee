@@ -25,7 +25,7 @@ void LEDChange()
     {
         LED_PORT--;
     }
-
+	// 移位操作
     if (LED_PORT > 4)
     {
         LED_PORT = 1;
@@ -34,8 +34,8 @@ void LEDChange()
     {
         LED_PORT = 4;
     }
-
-    switch (LED_PORT) // LED位选
+	// LED位选
+    switch (LED_PORT) 
     {
     case 1:
         P0 = 0x7F;
