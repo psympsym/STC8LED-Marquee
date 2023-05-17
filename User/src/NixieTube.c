@@ -1,9 +1,18 @@
 /* ---------------------------------- 包含头文件 --------------------------------- */
-#include "..\inc\STC8Ax_REG.h"
-#include "..\inc\Definition.h"
+#include "NixieTube.h"
 
-#include "..\Main.h"
-#include "..\inc\LEDChange.h"
+
+code const uint8_t DigDisplay_table[] = // 标准字库
+{
+//   0     1     2     3     4    5     6     7     8     9
+    0xFC, 0x60, 0xDA, 0xF2, 0x66,0xB6, 0xBE, 0xE0, 0xFE, 0xF6,
+//   u     n    black  -     o     F
+    0x7C, 0xEC, 0x00, 0x02, 0x3A, 0x8E,
+};
+
+/* 私有宏定义 */
+#define DigShow_PORT 	            P1			//数码管段选引脚
+#define DigShow_COM 	 	        P2			//数码管位选引脚
 
 /* ---------------------------------- 扩展变量 ---------------------------------- */
 uint8 LEDChangeTime = 30; // LED变化时间x10ms
@@ -29,7 +38,7 @@ void NixieTube()
     {
         case 1: // 第一位数码管显示
             DigShow_COM = 0xF7;
-            if (TR0 == 1) // 跑马灯开启
+            if (TR1 == 1) // 跑马灯开启
             {
                 if (direction_flag == 1) // 方向正显示n
                 {
@@ -40,40 +49,40 @@ void NixieTube()
                     DigShow_PORT = DigDisplay_table[10];
                 }
             }
-            else if (TR0 == 0) // 跑马灯暂停 显示o
+            else if (TR1 == 0) // 跑马灯暂停 显示o
             {
                 DigShow_PORT = DigDisplay_table[14]; 
             }
             break;
         case 2: // 第二位数码管显示
             DigShow_COM = 0xFB;
-            if (TR0 == 1) // 跑马灯开启 显示-
+            if (TR1 == 1) // 跑马灯开启 显示-
             {
                 DigShow_PORT = DigDisplay_table[13];
             }
-            else if (TR0 == 0) // 跑马灯暂停 显示F
+            else if (TR1 == 0) // 跑马灯暂停 显示F
             {
                 DigShow_PORT = DigDisplay_table[15];
             }
             break;
         case 3: // 第三位数码管显示
             DigShow_COM = 0xFD;
-            if (TR0 == 1)
+            if (TR1== 1)
             {
                 DigShow_PORT = DigDisplay_table[speed_second];
             }
-            else if (TR0 == 0) // 跑马灯暂停 关闭数码管
+            else if (TR1 == 0) // 跑马灯暂停 关闭数码管
             {
                 DigShow_PORT = DigDisplay_table[12];
             }
             break;
         case 4: // 第四位数码管显示
             DigShow_COM = 0xFE;
-            if (TR0 == 1)
+            if (TR1 == 1)
             {
                 DigShow_PORT = DigDisplay_table[speed_first];
             }
-            else if (TR0 == 0) // 跑马灯暂停 关闭数码管
+            else if (TR1== 0) // 跑马灯暂停 关闭数码管
             {
                 DigShow_PORT = DigDisplay_table[12];
             }

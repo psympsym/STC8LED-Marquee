@@ -1,59 +1,58 @@
-C51 COMPILER V9.60.0.0   INIT                                                              05/15/2023 09:26:30 PAGE 1   
+C51 COMPILER V9.60.0.0   INIT                                                              05/16/2023 20:13:57 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE INIT
 OBJECT MODULE PLACED IN .\Objects\Init.obj
-COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE User\src\Init.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
-                    -s\Init.lst) OBJECT(.\Objects\Init.obj)
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE User\src\Init.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User\inc) DEBUG OBJECTEXT
+                    -END PRINT(.\Listings\Init.lst) OBJECT(.\Objects\Init.obj)
 
 line level    source
 
    1          /* ---------------------------------- 包含头文件 --------------------------------- */
-   2          #include "..\inc\STC8Ax_REG.h"
-   3          #include "..\inc\Definition.h"
-   4          
-   5          /* ----------------------------------- 函数 ----------------------------------- */
-   6          
-   7          /* 第一区 初始化单片机 */
-   8          /**
-   9           * 功能：初始化单片机
-  10           * 参数：None
-  11           * 返回：None
-  12           * 说明：
-  13           */
-  14          void System_Init()
-  15          {
-  16   1          // 将P0引脚配置为高电平输出模式
-  17   1          GPIO_Init(GPIO_P0, Pin_All, GPIO_MODE_WEAK_PULL);
-  18   1      
-  19   1          // 将P1所有引脚配置为推挽输出模式
-  20   1          GPIO_Init(GPIO_P1, Pin_All, GPIO_MODE_OUT_PP);
-  21   1      
-  22   1          // 将P2所有引脚配置为推挽输出模式
-  23   1          GPIO_Init(GPIO_P2, Pin_All, GPIO_MODE_OUT_PP);
-  24   1      
-  25   1          // 将P5引脚配置为浮空输入模式
-  26   1          GPIO_Init(GPIO_P5, Pin_Low, GPIO_MODE_IN_FLOATING);
-  27   1      
-  28   1          led_dr1 = 1; // LED灭
-  29   1          led_dr2 = 1; // LED灭
-  30   1          led_dr3 = 1; // LED灭
-  31   1          led_dr4 = 1; // LED灭
-  32   1      }
-  33          
-  34          /* 第二区 初始化外围 */
-  35          /**
-  36           *
-  37           * 功能：初始化外围设备
-  38           * 参数：None
-  39           * 返回：None
-  40           * 说明：
-  41           */
-  42          void Peripheral_Init() // 初始化外围
-  43          {
-  44   1          AUXR &= 0x7F; // 定时器时钟12T模式
-  45   1          EA = 1; // 开总中断
-  46   1      }
+   2          #include "Init.h"
+   3          
+   4          /* ----------------------------------- 函数 ----------------------------------- */
+   5          
+   6          /* 第一区 初始化单片机 */
+   7          /**
+   8           * 功能：初始化单片机
+   9           * 参数：None
+  10           * 返回：None
+  11           * 说明：
+  12           */
+  13          void System_Init()
+  14          {
+  15   1          // 将P0引脚配置为高电平输出模式
+  16   1          GPIO_Init(GPIO_P0, Pin_All, GPIO_MODE_WEAK_PULL);
+  17   1      
+  18   1          // 将P1所有引脚配置为推挽输出模式
+  19   1          GPIO_Init(GPIO_P1, Pin_All, GPIO_MODE_OUT_PP);
+  20   1      
+  21   1          // 将P2所有引脚配置为推挽输出模式
+  22   1          GPIO_Init(GPIO_P2, Pin_All, GPIO_MODE_OUT_PP);
+  23   1      
+  24   1          // 将P5引脚配置为浮空输入模式
+  25   1          GPIO_Init(GPIO_P5, Pin_Low, GPIO_MODE_IN_FLOATING);
+  26   1              
+  27   1          led_dr1 = 1; // LED灭
+  28   1          led_dr2 = 1; // LED灭
+  29   1          led_dr3 = 1; // LED灭
+  30   1          led_dr4 = 1; // LED灭
+  31   1      }
+  32          
+  33          /* 第二区 初始化外围 */
+  34          /**
+  35           *
+  36           * 功能：初始化外围设备
+  37           * 参数：None
+  38           * 返回：None
+  39           * 说明：
+  40           */
+  41          void Peripheral_Init() // 初始化外围
+  42          {
+  43   1          AUXR &= 0x7F; // 定时器时钟12T模式
+  44   1          EA = 1; // 开总中断
+  45   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -62,9 +61,9 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-C51 COMPILER V9.60.0.0   INIT                                                              05/15/2023 09:26:30 PAGE 2   
-
    IDATA SIZE       =   ----    ----
+C51 COMPILER V9.60.0.0   INIT                                                              05/16/2023 20:13:57 PAGE 2   
+
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 

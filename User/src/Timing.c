@@ -1,15 +1,11 @@
 /* ---------------------------------- 包含头文件 --------------------------------- */
-#include "..\inc\STC8Ax_REG.h"
-#include "..\inc\Definition.h"
-
-#include "..\inc\KeyScan.h"
-#include "..\inc\NixieTube.h"
-#include "..\inc\LEDChange.h"
+#include "Timing.h"
 
 /* ---------------------------------- 私有宏定义 --------------------------------- */
 
 /* ---------------------------------- 私有变量 ---------------------------------- */
-uint8 count = 0;
+uint8 count  = 0;
+uint8 count1 = 0;
 uint8 count2 = 0;
 
 /* ----------------------------------- 函数 ----------------------------------- */
@@ -47,8 +43,8 @@ void Time1_Config() // 初始化外围
     TMOD &= 0x0F; // 设置定时器1模式
     TMOD |= 0x10; // 设置定时器1模式为16为自动重装载
 
-    TH1 = 0xFF; // 设置定时0初始值(65536-2)=63534=0xFF38
-    TL1 = 0x38; // 设置定时0初始值
+    TH1 = 0xF8; // 设置定时0初始值(65535-2000)=63535=0xF830
+    TL1 = 0x30; // 设置定时0初始值
     TF1 = 0;    // 清除TF1标志
     ET1 = 1;
     TR1 = 1;    // 定时器1开始计时
@@ -59,19 +55,15 @@ void Time0_ISR() interrupt 1
 {
 	TF0 = 0; //清除中断标志
     TR0 = 0; //关中断
-	// 调整LED变化时间—count2 x LEDChangeTime x 1ms
-	count2++;
-	if (count2 > 5)
+
+	// 扫描按键
+	if (++count1 % 5  == 0)
 	{
-		count2 = 0;
-		// 开启跑马灯
-		count++;
-		if (count >= LEDChangeTime)
-		{
-			count = 0;  // 清空计数
-			LEDChange(); // LED变化
-		}
+		//KeyScan();
 	}
+
+    // 扫描数码管
+    NixieTube();
 
     TH0 = 0xF8; // 重装初始值(65535-2000)=63535=0xF830
     TL0 = 0x30;
@@ -83,11 +75,21 @@ void Time1_ISR() interrupt 3
     TF1 = 0; //清除中断标志
     TR1 = 0; //关中断    
 
+	// 调整LED变化时间— count2 x LEDChangeTime x 1ms
+	count2++;
+	if (count2 >= 5)
+	{
+		count2 = 0;
+		// 开启跑马灯
+		count++;
+		if (count >= LEDChangeTime)
+		{
+			count = 0;  // 清空计数
+			LEDChange(); // LED变化
+		}
+	}
 
-    // 扫描数码管
-    NixieTube();
-
-    TH1 = 0xFF; // 重装初始值(65536-200)=65336=0xFF38
-    TL1 = 0x38;
+    TH1 = 0xF8; // 重装初始值(65535-2000)=63535=0xF830
+    TL1 = 0x30;
 	TR1 = 1;
 }

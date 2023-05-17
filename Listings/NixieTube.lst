@@ -1,104 +1,113 @@
-C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/15/2023 09:26:30 PAGE 1   
+C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/16/2023 20:13:57 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE NIXIETUBE
 OBJECT MODULE PLACED IN .\Objects\NixieTube.obj
-COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE User\src\NixieTube.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
-                    -stings\NixieTube.lst) OBJECT(.\Objects\NixieTube.obj)
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE User\src\NixieTube.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User\inc) DEBUG OBJE
+                    -CTEXTEND PRINT(.\Listings\NixieTube.lst) OBJECT(.\Objects\NixieTube.obj)
 
 line level    source
 
    1          /* ---------------------------------- 包含头文件 --------------------------------- */
-   2          #include "..\inc\STC8Ax_REG.h"
-   3          #include "..\inc\Definition.h"
+   2          #include "NixieTube.h"
+   3          
    4          
-   5          #include "..\Main.h"
-   6          #include "..\inc\LEDChange.h"
-   7          
-   8          /* ---------------------------------- 扩展变量 ---------------------------------- */
-   9          uint8 LEDChangeTime = 30; // LED变化时间x10ms
-  10          
-  11          /* ---------------------------------- 私有变量 ---------------------------------- */
-  12          uint8 digit_seg_en = 0; // 数码管位选
-  13          uint8 speed_second = 0; // 速度第二位
-  14          uint8 speed_first = 0; // 速度第一位
-  15          
-  16          /* ----------------------------------- 函数 ---------------------------------- */
-  17          void NixieTube()
-  18          {
-  19   1          speed_second = LEDChangeTime / 10;  // 取速度第二位
-  20   1          speed_first =  LEDChangeTime % 10;  // 取速度第一位
-  21   1              // 移位操作
-  22   1          digit_seg_en++;
-  23   1          if (digit_seg_en > 4)
-  24   1          {
-  25   2              digit_seg_en = 1;
-  26   2          }
-  27   1      
-  28   1          switch (digit_seg_en)
-  29   1          {
-  30   2              case 1: // 第一位数码管显示
-  31   2                  DigShow_COM = 0xF7;
-  32   2                  if (TR0 == 1) // 跑马灯开启
-  33   2                  {
-  34   3                      if (direction_flag == 1) // 方向正显示n
-  35   3                      {
-  36   4                          DigShow_PORT = DigDisplay_table[11];
-  37   4                      }
-  38   3                      else                     // 方向负显示u
-  39   3                      {
-  40   4                          DigShow_PORT = DigDisplay_table[10];
-  41   4                      }
-  42   3                  }
-  43   2                  else if (TR0 == 0) // 跑马灯暂停 显示o
-  44   2                  {
-  45   3                      DigShow_PORT = DigDisplay_table[14]; 
-  46   3                  }
-  47   2                  break;
-  48   2              case 2: // 第二位数码管显示
-  49   2                  DigShow_COM = 0xFB;
-  50   2                  if (TR0 == 1) // 跑马灯开启 显示-
-  51   2                  {
-  52   3                      DigShow_PORT = DigDisplay_table[13];
-  53   3                  }
-  54   2                  else if (TR0 == 0) // 跑马灯暂停 显示F
-C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/15/2023 09:26:30 PAGE 2   
+   5          code const uint8_t DigDisplay_table[] = // 标准字库
+   6          {
+   7          //   0     1     2     3     4    5     6     7     8     9
+   8              0xFC, 0x60, 0xDA, 0xF2, 0x66,0xB6, 0xBE, 0xE0, 0xFE, 0xF6,
+   9          //   u     n    black  -     o     F
+  10              0x7C, 0xEC, 0x00, 0x02, 0x3A, 0x8E,
+  11          };
+  12          
+  13          /* 私有宏定义 */
+  14          #define DigShow_PORT                P1                  //数码管段选引脚
+  15          #define DigShow_COM                     P2                      //数码管位选引脚
+  16          
+  17          /* ---------------------------------- 扩展变量 ---------------------------------- */
+  18          uint8 LEDChangeTime = 30; // LED变化时间x10ms
+  19          
+  20          /* ---------------------------------- 私有变量 ---------------------------------- */
+  21          uint8 digit_seg_en = 0; // 数码管位选
+  22          uint8 speed_second = 0; // 速度第二位
+  23          uint8 speed_first = 0; // 速度第一位
+  24          
+  25          /* ----------------------------------- 函数 ---------------------------------- */
+  26          void NixieTube()
+  27          {
+  28   1          speed_second = LEDChangeTime / 10;  // 取速度第二位
+  29   1          speed_first =  LEDChangeTime % 10;  // 取速度第一位
+  30   1              // 移位操作
+  31   1          digit_seg_en++;
+  32   1          if (digit_seg_en > 4)
+  33   1          {
+  34   2              digit_seg_en = 1;
+  35   2          }
+  36   1      
+  37   1          switch (digit_seg_en)
+  38   1          {
+  39   2              case 1: // 第一位数码管显示
+  40   2                  DigShow_COM = 0xF7;
+  41   2                  if (TR1 == 1) // 跑马灯开启
+  42   2                  {
+  43   3                      if (direction_flag == 1) // 方向正显示n
+  44   3                      {
+  45   4                          DigShow_PORT = DigDisplay_table[11];
+  46   4                      }
+  47   3                      else                     // 方向负显示u
+  48   3                      {
+  49   4                          DigShow_PORT = DigDisplay_table[10];
+  50   4                      }
+  51   3                  }
+  52   2                  else if (TR1 == 0) // 跑马灯暂停 显示o
+  53   2                  {
+  54   3                      DigShow_PORT = DigDisplay_table[14]; 
+C51 COMPILER V9.60.0.0   NIXIETUBE                                                         05/16/2023 20:13:57 PAGE 2   
 
-  55   2                  {
-  56   3                      DigShow_PORT = DigDisplay_table[15];
-  57   3                  }
-  58   2                  break;
-  59   2              case 3: // 第三位数码管显示
-  60   2                  DigShow_COM = 0xFD;
-  61   2                  if (TR0 == 1)
-  62   2                  {
-  63   3                      DigShow_PORT = DigDisplay_table[speed_second];
-  64   3                  }
-  65   2                  else if (TR0 == 0) // 跑马灯暂停 关闭数码管
-  66   2                  {
-  67   3                      DigShow_PORT = DigDisplay_table[12];
-  68   3                  }
-  69   2                  break;
-  70   2              case 4: // 第四位数码管显示
-  71   2                  DigShow_COM = 0xFE;
-  72   2                  if (TR0 == 1)
-  73   2                  {
-  74   3                      DigShow_PORT = DigDisplay_table[speed_first];
-  75   3                  }
-  76   2                  else if (TR0 == 0) // 跑马灯暂停 关闭数码管
-  77   2                  {
-  78   3                      DigShow_PORT = DigDisplay_table[12];
-  79   3                  }
-  80   2                  break;
-  81   2              default:
-  82   2                  break;
-  83   2          }
-  84   1      }
+  55   3                  }
+  56   2                  break;
+  57   2              case 2: // 第二位数码管显示
+  58   2                  DigShow_COM = 0xFB;
+  59   2                  if (TR1 == 1) // 跑马灯开启 显示-
+  60   2                  {
+  61   3                      DigShow_PORT = DigDisplay_table[13];
+  62   3                  }
+  63   2                  else if (TR1 == 0) // 跑马灯暂停 显示F
+  64   2                  {
+  65   3                      DigShow_PORT = DigDisplay_table[15];
+  66   3                  }
+  67   2                  break;
+  68   2              case 3: // 第三位数码管显示
+  69   2                  DigShow_COM = 0xFD;
+  70   2                  if (TR1== 1)
+  71   2                  {
+  72   3                      DigShow_PORT = DigDisplay_table[speed_second];
+  73   3                  }
+  74   2                  else if (TR1 == 0) // 跑马灯暂停 关闭数码管
+  75   2                  {
+  76   3                      DigShow_PORT = DigDisplay_table[12];
+  77   3                  }
+  78   2                  break;
+  79   2              case 4: // 第四位数码管显示
+  80   2                  DigShow_COM = 0xFE;
+  81   2                  if (TR1 == 1)
+  82   2                  {
+  83   3                      DigShow_PORT = DigDisplay_table[speed_first];
+  84   3                  }
+  85   2                  else if (TR1== 0) // 跑马灯暂停 关闭数码管
+  86   2                  {
+  87   3                      DigShow_PORT = DigDisplay_table[12];
+  88   3                  }
+  89   2                  break;
+  90   2              default:
+  91   2                  break;
+  92   2          }
+  93   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    148    ----
-   CONSTANT SIZE    =   ----    ----
+   CONSTANT SIZE    =     16    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      4    ----

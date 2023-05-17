@@ -324,7 +324,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.\User\inc</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -387,6 +387,11 @@
               <FilePath>.\User\src\Init.c</FilePath>
             </File>
             <File>
+              <FileName>Timing.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\src\Timing.c</FilePath>
+            </File>
+            <File>
               <FileName>KeyScan.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\src\KeyScan.c</FilePath>
@@ -397,19 +402,14 @@
               <FilePath>.\User\src\KeyServices.c</FilePath>
             </File>
             <File>
-              <FileName>LEDChange.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\src\LEDChange.c</FilePath>
-            </File>
-            <File>
               <FileName>NixieTube.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\src\NixieTube.c</FilePath>
             </File>
             <File>
-              <FileName>Timing.c</FileName>
+              <FileName>LEDChange.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\User\src\Timing.c</FilePath>
+              <FilePath>.\User\src\LEDChange.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -418,4 +418,3 @@
   </Targets>
 
 </Project>
-

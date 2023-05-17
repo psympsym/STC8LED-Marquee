@@ -1,19 +1,6 @@
 #ifndef _Definition_h_
 #define _Definition_h_
 
-/* 私有类型定义 -----------------------------------------------------*/
-sbit led_dr1 = P0 ^ 4;		/*!< LED1 引脚定义 */
-sbit led_dr2 = P0 ^ 5;		/*!< LED2 引脚定义 */
-sbit led_dr3 = P0 ^ 6;		/*!< LED3 引脚定义 */
-sbit led_dr4 = P0 ^ 7;		/*!< LED4 引脚定义 */
-
-sbit key_sr1 = P5 ^ 1; 		/*!< K1键 引脚定义 */
-sbit key_sr2 = P5 ^ 0; 		/*!< K2键 引脚定义 */
-sbit key_sr3 = P5 ^ 2; 		/*!< K3键 引脚定义 */
-sbit key_sr4 = P5 ^ 3; 		/*!< K4键 引脚定义 */
-
-sbit beep_dr = P3 ^ 3;    /*!< 蜂鸣器的驱动IO口 引脚定义 */
-
 typedef enum
 {
    /* IO 模式 */
@@ -91,8 +78,5 @@ typedef enum
         else	                                \
             Px_M1(gpio_x) &= ~(pin);			\
    }while(0)
-
-#define DigShow_PORT 	            P1			//数码管段选引脚
-#define DigShow_COM 	 	        P2			//数码管位选引脚
 
 #endif

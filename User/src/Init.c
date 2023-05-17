@@ -1,6 +1,5 @@
 /* ---------------------------------- 包含头文件 --------------------------------- */
-#include "..\inc\STC8Ax_REG.h"
-#include "..\inc\Definition.h"
+#include "Init.h"
 
 /* ----------------------------------- 函数 ----------------------------------- */
 
@@ -24,7 +23,7 @@ void System_Init()
 
     // 将P5引脚配置为浮空输入模式
     GPIO_Init(GPIO_P5, Pin_Low, GPIO_MODE_IN_FLOATING);
-
+	
     led_dr1 = 1; // LED灭
     led_dr2 = 1; // LED灭
     led_dr3 = 1; // LED灭

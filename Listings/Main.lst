@@ -1,49 +1,34 @@
-C51 COMPILER V9.60.0.0   MAIN                                                              05/15/2023 09:26:30 PAGE 1   
+C51 COMPILER V9.60.0.0   MAIN                                                              05/16/2023 20:13:57 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\Main.obj
-COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE User\Main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\Ma
-                    -in.lst) OBJECT(.\Objects\Main.obj)
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE User\Main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User\inc) DEBUG OBJECTEXTEND 
+                    -PRINT(.\Listings\Main.lst) OBJECT(.\Objects\Main.obj)
 
 line level    source
 
-   1          #include ".\inc\STC8Ax_REG.h"
-   2          #include ".\inc\Definition.h"
+   1          /* 包含头文件 */
+   2          #include "Main.h"
    3          
-   4          #include ".\inc\Init.h"
-   5          #include ".\inc\KeyScan.h"
-   6          #include ".\inc\KeyServices.h"
-   7          #include ".\inc\Timing.h"
-   8          
-   9          /* 扩展变量 -------------------------------------------------------*/
-  10          code const uint8_t DigDisplay_table[] = // 标准字库
-  11          {
-  12          //  0     1     2     3     4    5     6     7     8     9
-  13              0xFC, 0x60, 0xDA, 0xF2, 0x66,0xB6, 0xBE, 0xE0, 0xFE, 0xF6,
-  14          //  u     n    black  -     o     F
-  15              0x7C, 0xEC, 0x00, 0x02, 0x3A, 0x8E,
-  16          };
-  17          
-  18          /*=================================================================*/
-  19          void main()
-  20          {
-  21   1          System_Init();     // IO口初始化
-  22   1          Peripheral_Init(); // 开启总中断
-  23   1          Time0_Config();    // 跑马灯开始计时
-  24   1          Time1_Config();    // 按键扫描， 数码管扫描
-  25   1          while (1)
-  26   1          {
-  27   2                      // 扫描按键
-  28   2                      KeyScan();
-  29   2              KeyServices();
-  30   2          }
-  31   1      }
+   4          /*=================================================================*/
+   5          void main()
+   6          {
+   7   1          System_Init();     // IO口初始化
+   8   1          Peripheral_Init(); // 开启总中断
+   9   1          Time0_Config();    // 跑马灯开始计时
+  10   1          Time1_Config();    // 按键扫描， 数码管扫描
+  11   1          while (1)
+  12   1          {
+  13   2                      KeyScan();
+  14   2              KeyServices();
+  15   2          }
+  16   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =     20    ----
-   CONSTANT SIZE    =     16    ----
+   CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
