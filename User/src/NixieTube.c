@@ -10,7 +10,7 @@ code const uint8_t DigDisplay_table[] = // 标准字库
     0x7C, 0xEC, 0x00, 0x02, 0x3A, 0x8E,
 };
 
-/* 私有宏定义 */
+/* --------------------------------- 私有宏定义 ---------------------------------- */
 #define DigShow_PORT 	            P1			//数码管段选引脚
 #define DigShow_COM 	 	        P2			//数码管位选引脚
 
@@ -91,3 +91,5 @@ void NixieTube()
             break;
     }
 }
+
+void NixieTube()
